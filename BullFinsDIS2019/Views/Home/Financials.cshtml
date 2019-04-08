@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Financials Data";
+}
+
+@model IEnumerable<BullFinsDIS2019.Models.EF_Models.Financials>
+
+<h2>Financial Data</h2>
+
+@if (Model == null)
+{
+    <p>Sorry, no Financial data exists for this company.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Report Date
+                </th>
+                <th>
+                    Gross Profit
+                </th>
+                <th>
+                    Total Revenue
+                </th>
+                <th>
+                    Total Assets
+                </th>
+                <th>
+                    Total Liabilities
+                </th>
+                <th>
+                    Total Cash
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reportdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.grossprofit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalrevenue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalassets)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalliabilities)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalcash)
+                </td>
+            </tr>
+           }
+
+</tbody>
+    </table>
+
+}
