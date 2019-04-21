@@ -92,7 +92,7 @@ namespace BullFinsDIS2019.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "userStock",
+                name: "UserStock",
                 columns: table => new
                 {
                     user = table.Column<string>(nullable: false),
@@ -101,7 +101,7 @@ namespace BullFinsDIS2019.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_userStock", x => new { x.user, x.symbol });
+                    table.PrimaryKey("PK_UserStock", x => new { x.user, x.symbol });
                 });
 
             migrationBuilder.CreateTable(
@@ -214,24 +214,24 @@ namespace BullFinsDIS2019.Migrations
                 name: "Financials",
                 columns: table => new
                 {
+                    symbol = table.Column<string>(nullable: false),
                     reportdate = table.Column<string>(nullable: false),
                     grossprofit = table.Column<decimal>(nullable: false),
                     totalrevenue = table.Column<decimal>(nullable: false),
                     totalassets = table.Column<decimal>(nullable: false),
                     totalliabilities = table.Column<decimal>(nullable: false),
                     totalcash = table.Column<decimal>(nullable: false),
-                    cashflow = table.Column<decimal>(nullable: false),
-                    SymbolFinancialsymbol = table.Column<string>(nullable: true)
+                    cashflow = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Financials", x => x.reportdate);
+                    table.PrimaryKey("PK_Financials", x => new { x.symbol, x.reportdate });
                     table.ForeignKey(
-                        name: "FK_Financials_SymbolFinancials_SymbolFinancialsymbol",
-                        column: x => x.SymbolFinancialsymbol,
+                        name: "FK_Financials_SymbolFinancials_symbol",
+                        column: x => x.symbol,
                         principalTable: "SymbolFinancials",
                         principalColumn: "symbol",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -272,11 +272,6 @@ namespace BullFinsDIS2019.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Financials_SymbolFinancialsymbol",
-                table: "Financials",
-                column: "SymbolFinancialsymbol");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -306,7 +301,7 @@ namespace BullFinsDIS2019.Migrations
                 name: "StockStatistics");
 
             migrationBuilder.DropTable(
-                name: "userStock");
+                name: "UserStock");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

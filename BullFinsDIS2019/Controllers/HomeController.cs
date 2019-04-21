@@ -255,7 +255,7 @@ namespace BullFinsDIS2019.Controllers
         public IActionResult Financials(String symbol)
         {
             SymbolFinancial financials = GetFinancials(symbol);
-            PopulateSymbolFinancialData(financials);
+            PopulateSymbolFinancialData(financials, symbol);
 
             List<Financials> financialList = financials.financials;
             return View(financialList);
@@ -330,17 +330,36 @@ namespace BullFinsDIS2019.Controllers
         }
 
         /*
-            Save the Symboll financial data in the database
+            Save the Symbol financial data in the database
         */
-        public void PopulateSymbolFinancialData(SymbolFinancial symbolFinancial)
+        public void PopulateSymbolFinancialData(SymbolFinancial symbolFinancial, String symbol)
         {
-            //Database will give PK constraint violation error when trying to insert record with existing PK.
-            //So add company only if it doesnt exist, check existence using symbol (PK)
-            if (dbContext.SymbolFinancials.Where(c => c.symbol.Equals(symbolFinancial.symbol)).Count() == 0)
+            // Database will give PK constraint violation error when trying to insert record with existing PK.
+            // So add financial data only if it doesnt exist
+            // check existence using symbol (Composite PK) and reportDate (Composite  PK)
+
+            SymbolFinancial sym = new SymbolFinancial();
+            sym.symbol = symbol;
+            if (dbContext.SymbolFinancials.Where(c => c.symbol.Equals(symbol)).Count() == 0)
             {
-                dbContext.SymbolFinancials.Add(symbolFinancial);
+                dbContext.SymbolFinancials.Add(sym);
             }
             dbContext.SaveChanges();
+
+            if (symbolFinancial.financials == null) {
+                return;
+            }
+
+            foreach (Financials fin in symbolFinancial.financials) {
+
+                if (dbContext.Financials.Where(c => c.symbol.Equals(symbol)
+                    && c.reportdate.Equals(fin.reportdate)).Count() == 0)
+                {
+                    fin.symbol = symbol;
+                    dbContext.Financials.Add(fin);
+                }
+                dbContext.SaveChanges();
+            }           
         }
     }
 }

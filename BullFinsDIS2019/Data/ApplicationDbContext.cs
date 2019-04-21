@@ -17,12 +17,17 @@ namespace BullFinsDIS2019.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<StockStats> StockStatistics { get; set; }
         public DbSet<SymbolFinancial> SymbolFinancials { get; set; }
+        public DbSet<Financials> Financials { get; set; }
         public DbSet<UserStocks> UserStock { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserStocks>()
                 .HasKey(c => new { c.user, c.symbol });
+
+            modelBuilder.Entity<Financials>()
+                .HasKey(c => new { c.symbol, c.reportdate });
+
             base.OnModelCreating(modelBuilder);
         }
     }

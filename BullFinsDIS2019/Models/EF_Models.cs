@@ -61,7 +61,7 @@ namespace BullFinsDIS2019.Models
 
             public class Financials
             {
-                [Key]
+                public string symbol { get; set; }
                 public string reportdate { get; set; }
                 public decimal grossprofit { get; set; }
                 public decimal totalrevenue { get; set; }

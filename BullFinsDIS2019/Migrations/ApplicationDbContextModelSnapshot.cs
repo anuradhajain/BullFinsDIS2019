@@ -41,10 +41,9 @@ namespace BullFinsDIS2019.Migrations
 
             modelBuilder.Entity("BullFinsDIS2019.Models.EF_Models+Financials", b =>
                 {
-                    b.Property<string>("reportdate")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("symbol");
 
-                    b.Property<string>("SymbolFinancialsymbol");
+                    b.Property<string>("reportdate");
 
                     b.Property<decimal>("cashflow");
 
@@ -58,9 +57,7 @@ namespace BullFinsDIS2019.Migrations
 
                     b.Property<decimal>("totalrevenue");
 
-                    b.HasKey("reportdate");
-
-                    b.HasIndex("SymbolFinancialsymbol");
+                    b.HasKey("symbol", "reportdate");
 
                     b.ToTable("Financials");
                 });
@@ -107,7 +104,7 @@ namespace BullFinsDIS2019.Migrations
 
                     b.HasKey("user", "symbol");
 
-                    b.ToTable("userStock");
+                    b.ToTable("UserStock");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -279,7 +276,8 @@ namespace BullFinsDIS2019.Migrations
                 {
                     b.HasOne("BullFinsDIS2019.Models.EF_Models+SymbolFinancial")
                         .WithMany("financials")
-                        .HasForeignKey("SymbolFinancialsymbol");
+                        .HasForeignKey("symbol")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
