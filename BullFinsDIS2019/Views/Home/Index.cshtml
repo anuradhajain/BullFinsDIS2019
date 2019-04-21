@@ -19,12 +19,61 @@
 </head>
 
 
-    <h1> <b>Welcome to BullFins 🐮</b></h1>
-    <h3> The most trusted place when it comes to stocks 📉 and tradings  💰 </h3>
+<h1> <b>Welcome to BullFins 🐮</b></h1>
+<h3> The most trusted place when it comes to stocks 📉 and tradings  💰 </h3>
 
 
-    <div class="container">
-        <img src="~/img/pic4Bull.jpg" alt="Notebook" style="width:100%;" /> >
+
+
+
+
+
+<body>
+
+    <h2 class="w3-center"></h2>
+
+    <div class="w3-content w3-display-container">
+        <img class="mySlides" src="~/img/pic4Bull.jpg" style="width:100%">
+        <img class="mySlides" src="~/img/pic3WorldMap.jpg" style="width:100%">
+        <img class="mySlides" src="~/img/pic2Stockhart.jpg" style="width:100%">
+        <img class="mySlides" src="~/img/pic5NTSE.gif" style="width:100%">
+
+
+        
     </div>
 
-    <p style="color:red"><b>Stock investments are subjected to market risk. Please read all the stock related documents carefully before investing</b></p>
+    <script>
+        var slideIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > x.length) { slideIndex = 1 }
+            x[slideIndex - 1].style.display = "block";
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        
+        }
+    </script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+<p style="color:red"><b>Stock investments are subjected to market risk. Please read all the stock related documents carefully before investing</b></p>
+
+
+
