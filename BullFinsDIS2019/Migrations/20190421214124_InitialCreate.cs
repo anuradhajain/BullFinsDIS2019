@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BullFinsDIS2019.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,6 +89,19 @@ namespace BullFinsDIS2019.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SymbolFinancials", x => x.symbol);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "userStock",
+                columns: table => new
+                {
+                    user = table.Column<string>(nullable: false),
+                    symbol = table.Column<string>(nullable: false),
+                    quantity = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_userStock", x => new { x.user, x.symbol });
                 });
 
             migrationBuilder.CreateTable(
@@ -291,6 +304,9 @@ namespace BullFinsDIS2019.Migrations
 
             migrationBuilder.DropTable(
                 name: "StockStatistics");
+
+            migrationBuilder.DropTable(
+                name: "userStock");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

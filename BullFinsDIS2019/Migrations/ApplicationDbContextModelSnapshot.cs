@@ -97,6 +97,19 @@ namespace BullFinsDIS2019.Migrations
                     b.ToTable("SymbolFinancials");
                 });
 
+            modelBuilder.Entity("BullFinsDIS2019.Models.EF_Models+UserStocks", b =>
+                {
+                    b.Property<string>("user");
+
+                    b.Property<string>("symbol");
+
+                    b.Property<string>("quantity");
+
+                    b.HasKey("user", "symbol");
+
+                    b.ToTable("userStock");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

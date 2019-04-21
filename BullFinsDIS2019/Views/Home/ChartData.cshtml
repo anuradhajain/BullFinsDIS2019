@@ -1,4 +1,8 @@
 ﻿@using static BullFinsDIS2019.Models.EF_Models;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "Chart Data";
 }
@@ -6,7 +10,7 @@
 @model IEnumerable<BullFinsDIS2019.Models.EF_Models.Chart>
 
 <h2>Stock Data for @ViewBag.symbol</h2>
-<br/>
+<br />
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
@@ -34,6 +38,11 @@
             <th>
                 Revenue Per Share
             </th>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th>
+                </th>
+            }
             <th>
             </th>
         </tr>
@@ -63,6 +72,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.revenuePerShare)
                 </td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <a id="dbopt" asp-controller="Home" asp-action="BuyRequest" asp-route-symbol="@ViewBag.symbol">BUY</a>
+                    </td>
+                }
                 <td>
                     <a id="dbopt" asp-controller="Home" asp-action="Financials" asp-route-symbol="@ViewBag.symbol">Get Financial Info</a>
                 </td>

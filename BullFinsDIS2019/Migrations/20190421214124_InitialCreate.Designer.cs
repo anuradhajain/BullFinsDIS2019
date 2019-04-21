@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BullFinsDIS2019.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190408024926_CreateDB")]
-    partial class CreateDB
+    [Migration("20190421214124_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,6 +97,19 @@ namespace BullFinsDIS2019.Migrations
                     b.HasKey("symbol");
 
                     b.ToTable("SymbolFinancials");
+                });
+
+            modelBuilder.Entity("BullFinsDIS2019.Models.EF_Models+UserStocks", b =>
+                {
+                    b.Property<string>("user");
+
+                    b.Property<string>("symbol");
+
+                    b.Property<string>("quantity");
+
+                    b.HasKey("user", "symbol");
+
+                    b.ToTable("userStock");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -123,6 +123,37 @@ namespace BullFinsDIS2019.Controllers
             return stockStats;
         }
 
+        // Get User Portolio Information from the database
+        public List<UserStocks> GetUserPortfolio(String user) {
+            IQueryable<UserStocks> portfolio = dbContext.UserStock.Where(c => c.user.Equals(user));
+
+            List<UserStocks> stockList = new List<UserStocks>();
+            foreach (UserStocks stock in portfolio)
+            {
+                stockList.Add(stock);
+            }
+            return stockList;
+        }
+
+
+        // Get User Portolio Information from the database
+        public void UpdateUserPortfolio(String user, String symbol, String quantity)
+        {
+            if (dbContext.UserStock.Where(c => c.user.Equals(user) && c.symbol.Equals(symbol)).Count() == 0)
+            {
+                UserStocks stock = new UserStocks();
+                stock.user = user;
+                stock.symbol = symbol;
+                stock.quantity = quantity;
+                dbContext.UserStock.Add(stock);
+            } else {
+                IQueryable<UserStocks> userStockList = dbContext.UserStock.Where(c => c.user.Equals(user) && c.symbol.Equals(symbol));
+                String oldQuantity = userStockList.First().quantity;
+                userStockList.First().quantity = (int.Parse(oldQuantity) + int.Parse(quantity)) + "";
+            }
+            dbContext.SaveChanges();
+        }
+
         // Calling the charts API
         public List<Chart> GetChartData(String symbol)
         {
@@ -197,6 +228,28 @@ namespace BullFinsDIS2019.Controllers
             List<Company> companies = GetSymbols();
             PopulateSymbols(companies);
             return View(companies);
+        }
+
+        public IActionResult Portfolio(String user)
+        {
+            return View(GetUserPortfolio(user));
+        }
+
+
+        public IActionResult BuyRequest(String symbol)
+        {
+            ViewBag.symbol = symbol;
+            return View();
+        }
+
+        public IActionResult BuySubmit(String quantity, String symbol, String userName)
+        {
+            ViewBag.symbol   = symbol;
+            ViewBag.quantity = quantity;
+            ViewBag.user     = userName;
+
+            UpdateUserPortfolio(userName, symbol, quantity);
+            return View();
         }
 
         public IActionResult Financials(String symbol)

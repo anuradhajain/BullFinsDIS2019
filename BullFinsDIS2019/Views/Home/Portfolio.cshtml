@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "User Portfolio";
+}
+
+@model IEnumerable<BullFinsDIS2019.Models.EF_Models.UserStocks>
+
+<h2>User's Portfolio</h2>
+
+@if (Model == null)
+{
+<p>You haven't purchased any stock yet.</p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Symbol
+            </th>
+            <th>
+                Quantity
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+        </tr>
+           }
+    </tbody>
+</table>
+}

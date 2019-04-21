@@ -1,0 +1,22 @@
+﻿@using static BullFinsDIS2019.Models.EF_Models;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Stock Purchase Confirmation!";
+}
+
+<h2>Stock Purchased Confirmation</h2>
+<br />
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    Company Name: @ViewBag.symbol<br />
+    Quantity Purchase: @ViewBag.quantity<br />
+
+    <br /><br />
+    <a asp-controller="Home" asp-action="Portfolio" asp-route-user="@User.Identity.Name">View Portfolio</a>
+    <br />
+    <a asp-controller="Home" asp-action="Symbols">Buy Another Stocks</a>
+    <br />
+    <a asp-controller="Home" asp-action="Index">Back to Home</a>

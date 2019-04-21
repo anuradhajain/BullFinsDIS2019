@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BullFinsDIS2019.Models
     {
@@ -32,6 +33,12 @@ namespace BullFinsDIS2019.Models
 
             }
 
+            public class UserStocks {
+                public string user { get; set; }
+                public string symbol { get; set; }
+                public string quantity { get; set; }
+            }
+
             public class Chart
             {
                 [Key]
@@ -43,7 +50,6 @@ namespace BullFinsDIS2019.Models
                 public decimal low { get; set; }
                 public decimal close { get; set; }
                 public decimal change { get; set; }
-
             }
 
             public class SymbolFinancial
@@ -64,7 +70,6 @@ namespace BullFinsDIS2019.Models
                 public decimal totalcash { get; set; }
                 //public decimal totaldebt { get; set; }
                 public decimal cashflow { get; set; }
-
             }
         }
     }
