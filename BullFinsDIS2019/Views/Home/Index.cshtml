@@ -15,13 +15,23 @@
         body {
             background: linear-gradient(to bottom, #ccccff 0%, #ffffff 100%);
         }
+        .img {
+            position: center;
+            float: left;
+            width: 400px;
+            height: 300px;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 </head>
 
 
 <h1> <b>Welcome to BullFins </b></h1>
-<h3> The most trusted place when it comes to stocks 📉 and tradings  💰 </h3>
+<h3> The most trusted place when it comes to stocks 📉 and tradings  💰* </h3>
 
+<p></p>
 <p></p>
 
 
@@ -30,9 +40,7 @@
 
 <body>
 
-    <h2 class="w3-center"></h2>
-
-    <div class="w3-content w3-display-container">
+   
         <img class="mySlides" src="~/img/pic4Bull.jpg" style="width:100%">
         <img class="mySlides" src="~/img/pic3WorldMap.jpg" style="width:100%">
         <img class="mySlides" src="~/img/pic2Stockhart.jpg" style="width:100%">
@@ -55,7 +63,7 @@
             slideIndex++;
             if (slideIndex > x.length) { slideIndex = 1 }
             x[slideIndex - 1].style.display = "block";
-            setTimeout(carousel, 2000); // Change image every 2 seconds
+            setTimeout(carousel, 3000); // Change image every 5 seconds
         
         }
     </script>
@@ -73,7 +81,7 @@
 
 
 <p></p>
-<p style="color:red"><b>Stock investments are subjected to market risk. Please read all the stock related documents carefully before investing</b></p>
+<p style="color:red"><b>*Stock investments are subjected to market risk. Please read all the stock related documents carefully before investing !</b></p>
 
 
 
